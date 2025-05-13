@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".forbuyer.MainActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="739dp"
+        android:layout_marginTop="6dp"
+        android:background="#FAD4C0"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="412dp"
+            android:layout_height="61dp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="382dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center"
+            android:background="@drawable/spinnergood" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextNumber"
+                android:layout_width="375dp"
+                android:layout_height="97dp"
+                android:layout_gravity="center"
+                android:background="@drawable/spinnergood"
+                android:ems="10"
+                android:hint="Enter the amount"
+                android:inputType="number" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="83dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="403dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="272dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/spinnergood"
+                    android:onClick="doo"
+                    android:text="calculate"
+                    android:textColor="#F2F1F1"
+                    android:textColorLink="#E3E9E2"
+                    android:textSize="20sp"
+                    app:backgroundTint="#137617" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="338dp"
+                    android:layout_height="89dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/spinnergood"
+                    android:hint="how much money with out amlot"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="81dp" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="146dp"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="56dp"
+                    android:background="@drawable/spinnergood"
+                    android:text="next"
+                    android:textSize="20sp"
+                    app:backgroundTint="#137617" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
