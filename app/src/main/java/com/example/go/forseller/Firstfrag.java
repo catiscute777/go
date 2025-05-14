@@ -133,10 +133,10 @@ Intent gi;int in;
                 for(DataSnapshot data:snapshot.getChildren()){
 
 
-                    if(data.getValue(Users.class).password.equals(mParam1)){
+                    if(data.getValue(Users.class).getPassword().equals(mParam1)){
                         u = data.getValue(Users.class);
                         k = u;
-                        adapter = new currencyAdapter(getContext(), u.currency);
+                        adapter = new currencyAdapter(getContext(), u.getCurrency());
                         listView.setAdapter(adapter);
                         t= in;
                         myRef = FB.F.getReference("Users/user"+(t+1));
@@ -237,11 +237,11 @@ Intent gi;int in;
                         EditText editText = dialogView.findViewById(R.id.editTextNumber4);
                         String userInput = editText.getText().toString();
                         int sum1 = parseInt(userInput);
-                        s.sum=sum1;
+                        s.setSum(sum1);
 
-                        for(int y=0;y<u.currency.size();y++){
-                            if(u.currency.get(y).equals(s.type))
-                                u.currency.set(y,s);
+                        for(int y=0;y<u.getCurrency().size();y++){
+                            if(u.getCurrency().get(y).equals(s.getType()))
+                                u.getCurrency().set(y,s);
                         }
 
                         getActivity().runOnUiThread(() -> {
@@ -264,7 +264,7 @@ Intent gi;int in;
         edit.setNegativeButton("Delete the currency", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                u.currency.remove(s);
+                u.getCurrency().remove(s);
                 getActivity().runOnUiThread(() -> {
                     adapter.notifyDataSetChanged(); });
                 myRef.setValue(u);

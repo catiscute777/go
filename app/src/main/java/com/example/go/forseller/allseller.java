@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.go.R;
-import com.example.go.secondfrag;
 import com.google.android.material.tabs.TabLayout;
 
 /**

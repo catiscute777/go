@@ -53,12 +53,12 @@ public class CustomAdapter extends ArrayAdapter<Users> {
         Users users = getItem(position);
         String currency = "";
         // Loops through each currency entry to find a match
-        for (int i = 1; i < users.currency.size(); i++) {
-            String type = users.currency.get(i).type;
+        for (int i = 1; i < users.getCurrency().size(); i++) {
+            String type = users.getCurrency().get(i).getType();
             type = type.substring(0, 3);
             //Check if the currency matches the one requested
             if (type.equals(this.type1)) {
-                currency = users.currency.get(i).sum + " " + type;
+                currency = users.getCurrency().get(i).getSum() + " " + type;
             }
         }
         // Inflate the view if it's null
@@ -70,8 +70,8 @@ public class CustomAdapter extends ArrayAdapter<Users> {
         TextView addressTextView = convertView.findViewById(R.id.addressTextView);
         TextView sum = convertView.findViewById(R.id.sumTextView);
         // Populate the view with user data
-        emailTextView.setText(users.email);
-        addressTextView.setText(users.city + " " + users.address);
+        emailTextView.setText(users.getEmail());
+        addressTextView.setText(users.getCity() + " " + users.getAddress());
         sum.setText(currency);
         return convertView;
     }

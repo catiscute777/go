@@ -1,4 +1,4 @@
-package com.example.go;
+package com.example.go.forbuyer;
 
 import static android.view.View.INVISIBLE;
 
@@ -23,6 +23,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
+import com.example.go.Class.text;
+import com.example.go.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,7 +50,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -92,7 +93,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
        FirebaseAuth first = FirebaseAuth.getInstance(Firstapp);
         currentUser = first.getCurrentUser();
         btn  = findViewById(R.id.button5);
-        intent = new Intent(this,FirebasedatabseService.class);
+        intent = new Intent(this, FirebasedatabseService.class);
         gi = getIntent();
         city = gi.getStringExtra("c");
         e= gi.getStringExtra("e");
@@ -102,7 +103,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data:snapshot.getChildren()){
-                    if(data.getValue(Users.class).email.equals(e)){
+                    if(data.getValue(Users.class).getEmail().equals(e)){
                     buy = data.getValue(Users.class);
                     t= in;
                     myref = FB.F.getReference("Users/user"+(t+1));}
@@ -274,12 +275,12 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
             String msg  = useremail+ "send a request for:"+rq;
             text message = new text(useremail,msg);
 
-            buy.msges.add(message);
+            buy.getMsges().add(message);
             myref.setValue(buy);
             String refernce = myref.toString();
             intent.putExtra("myuser",refernce);
-            intent.putExtra("msg", message.messageText);
-            intent.putExtra("email",message.emailUser);
+            intent.putExtra("msg", message.getContent());
+            intent.putExtra("email",message.getemailuser());
             startService(intent);
             btn.setVisibility(INVISIBLE);
             dialog.dismiss(); }

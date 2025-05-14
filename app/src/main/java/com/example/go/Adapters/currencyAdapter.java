@@ -55,8 +55,8 @@ public class currencyAdapter extends ArrayAdapter<currency> {
         TextView tvName = convertView.findViewById(R.id.tvName);
         TextView tvAge = convertView.findViewById(R.id.tvAge);
         if (currency != null) {
-            tvName.setText(currency.type);
-            tvAge.setText(String.valueOf(currency.sum));
+            tvName.setText(currency.getType());
+            tvAge.setText(String.valueOf(currency.getSum()));
         }
         return convertView;
     }

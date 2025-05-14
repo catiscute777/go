@@ -26,7 +26,7 @@
         android:theme="@style/Theme.Go"
         tools:targetApi="31">
         <service
-            android:name=".FirebasedatabseService"
+            android:name=".forbuyer.FirebasedatabseService"
             android:enabled="true"
             android:exported="false">
 
@@ -39,7 +39,7 @@
         </receiver>
 
         <activity
-            android:name=".map"
+            android:name=".forbuyer.map"
             android:exported="false" />
         <activity
             android:name=".forbuyer.choosebuyer"

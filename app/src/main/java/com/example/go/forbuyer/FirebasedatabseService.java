@@ -1,4 +1,4 @@
-package com.example.go;
+package com.example.go.forbuyer;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
+import com.example.go.Class.text;
 import com.example.go.buildservises.MyReceiver;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,18 +47,19 @@ public class FirebasedatabseService extends Service {
         refernce = refernce.substring(refernce.lastIndexOf("/") + 1);
         String email = intent.getStringExtra("email");
         String text = intent.getStringExtra("msg");
-        text message = new text(email, text);
+        com.example.go.Class.text message = new text(email, text);
         DatabaseReference myref = FB.F.getReference("Users/" + refernce);
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users n = snapshot.getValue(Users.class);
 
-                Log.d("msg", "" + n.requests.size());
-                for (int i = 0; i < n.requests.size(); i++) {
-                    if (n.requests.get(i).emailUser.equals(message.emailUser) && (n.requests.get(i).messageText.equals(message.messageText))) {
+                for (int i = 0; i < n.getRequests().size(); i++) {
+                    if (n.getRequests().get(i).getemailuser().equals(message.getemailuser()) && (n.getRequests().get(i).getContent().equals(message.getContent()))&&(!n.getRequests().get(i).getIsRead())) {
                         Log.d("msg", "true");
                         scheduleAlarm("you can go take the money");
+                        n.getRequests().get(i).setIsReadtrue();
+                        myref.setValue(n);
 
                     }
                 }

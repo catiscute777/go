@@ -1,8 +1,6 @@
 package com.example.go.loginactivity;
 
 import android.annotation.SuppressLint;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +18,8 @@ import com.example.go.Class.FB;
 import com.example.go.Class.Users;
 import com.example.go.Class.currency;
 import com.example.go.R;
-import com.example.go.text;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.go.buildservises.AddressValidationCallback;
+import com.example.go.Class.text;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -36,9 +34,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -57,7 +53,7 @@ public class registerforseller extends AppCompatActivity {
     private EditText etEmail; private EditText etPassword;
     private Button btnSignUp;ArrayAdapter<CharSequence> dp;
     Spinner spin;EditText eda;boolean working = false;
-    ArrayList<Users> us = new ArrayList<>();int l;
+    ArrayList<Users> us = new ArrayList<>();int l;boolean working1;
 
     /**
      * Initializes the activity. Sets up the layout, UI components, and listeners for the registration process.
@@ -100,33 +96,43 @@ public class registerforseller extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener()
         { @Override
         public void onClick(View v)
-        { Log.d("msg","working plz");
+        {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
             String adress = eda.getText().toString().trim();
             String City = spin.getSelectedItem().toString().trim();
-
+            /**
+             * Checks if all required fields are filled.
+             * by checking if the email, password, address, and city are not empty.
+             * is the address valid and if there is no existing buyer at the same address.
+             * using call back to show if the address is valid or not*/
             if (!email.isEmpty() && !password.isEmpty() && !adress.isEmpty() && !City.isEmpty())
             {
                 try {
-                    if(checkingadress(adress, City)){
-                        registeruser(email, password,adress, City);
-
+                    checkingadress(adress,City, new AddressValidationCallback() {
+                        @Override
+                        public void onResult(boolean isValid) {
+                            if(isValid){
+                                registeruser(email, password,adress, City);
+                            }
+                            else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.d("cheking","hello world ");
+                                        Toast.makeText(registerforseller.this, "the address is wrong or there is a buyer in this place", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                     }
-                    else {
-                        Toast.makeText(registerforseller.this,"the address is wrong or there is a buyer in this place",Toast.LENGTH_SHORT).show();}
-
-                } catch (UnsupportedEncodingException e) {
+                    });}
+            catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         else
-                Toast.makeText(registerforseller.this, "all the componnets are requird ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(registerforseller.this, "all the components are required ", Toast.LENGTH_SHORT).show();
         }
-
-
-
         }); }
 
     /**
@@ -134,25 +140,39 @@ public class registerforseller extends AppCompatActivity {
      *
      * @param address The address to check.
      * @param City    The city of the address.
-     * @return {@code true} if the address is valid and unique, {@code false} otherwise.
+     * using call back to show if the address is valid or not
      * @throws UnsupportedEncodingException If there is an issue encoding the address for the API request.
      */
-    private boolean checkingadress(String address,String City) throws UnsupportedEncodingException {
+    private void checkingadress(String address,String City, AddressValidationCallback callback) throws UnsupportedEncodingException {
         working = false;
+        working1 = false;
         String addressstr = address+", "+City+", Israel";
-        if(addressreal(addressstr)){
-        for(int i =0 ; i<us.size();i++){
-            String address1 = us.get(i).address+", "+us.get(i).city+", Israel";
-            Log.d("msg",address1);
-            Log.d("cheking",address);
-            if(addressstr.equals(address1))
-            {Toast.makeText(registerforseller.this, "There is a buyer in this place", Toast.LENGTH_SHORT).show();
-            return false;}
-        }
-        return true;}
-        Log.d("strange","don't work plz");
-       return false;
-    }
+        addressreal(addressstr, new AddressValidationCallback() {
+            @Override
+            public void onResult(boolean isValid) {
+                if(isValid){
+                    for(int i =0 ; i<us.size();i++){
+                        String address1 = us.get(i).getAddress()+", "+us.get(i).getCity()+", Israel";
+                        Log.d("msg",address1);
+                        Log.d("cheking",address);
+                        if(addressstr.equals(address1))
+                        {runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(registerforseller.this, "There is a buyer in this place", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                            callback.onResult(false);
+                        return; }
+                    }
+                    callback.onResult(true);
+                return;}
+                callback.onResult(false);
+            }
+        });
+
+            }
+
 
 
 
@@ -160,11 +180,12 @@ public class registerforseller extends AppCompatActivity {
      * Checks if an address is real by using the Google Maps Geocoding API.
      *
      * @param address The address to check for validity.
-     * @return {@code true} if the address is real and valid, {@code false} otherwise.
+     * it using the Google Maps Geocoding API to determine if an address is valid.
+     * @param callback The callback to invoke when the validation result is available.
      * @throws UnsupportedEncodingException If there is an issue encoding the address for the API request.
      */
 
-    private boolean addressreal(String address) throws UnsupportedEncodingException {
+    private void addressreal(String address, AddressValidationCallback callback) throws UnsupportedEncodingException {
         working = false;
         OkHttpClient client = new OkHttpClient();
         String formattedAddress = address.replace(" ", "+");
@@ -174,6 +195,7 @@ public class registerforseller extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                callback.onResult(false);
             }
 
             @Override
@@ -190,16 +212,18 @@ public class registerforseller extends AppCompatActivity {
                        JSONObject firstResult = results.getJSONObject(0);
                        if (!firstResult.has("partial_match")) {
                            working = true;
+                           callback.onResult(true);
                        }
+                       callback.onResult(false);
                        }
                    }catch (JSONException e) {
+                       callback.onResult(false);
                        throw new RuntimeException(e);
+
                    }}
             }
         });
-        return working;
     }
-
 /**
   *If the registration is successful Registers a new user with Firebase Authentication and adds their
   *data to the Firebase database. */
@@ -216,8 +240,8 @@ public class registerforseller extends AppCompatActivity {
                             text t = new text("t","this is a message");
                             Users buy = new Users(email,password,City,address);
                             buy.addcurrency(n);
-                            buy.msges.add(t);
-                            buy.requests.add(t);
+                            buy.getMsges().add(t);
+                            buy.getRequests().add(t);
                             FB.buyer.child("user"+(us.size()+1)).setValue(buy);
                             finish(); }
                         else { Toast.makeText(registerforseller.this, "Registration Failed", Toast.LENGTH_SHORT).show(); } }

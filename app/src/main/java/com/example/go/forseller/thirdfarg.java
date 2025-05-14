@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
 import com.example.go.R;
-import com.example.go.text;
-import com.example.go.textAdapter;
+import com.example.go.Class.text;
+import com.example.go.Adapters.textAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -103,9 +103,9 @@ public class thirdfarg extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    if (data.getValue(Users.class).password.equals(mParam1)) {
+                    if (data.getValue(Users.class).getPassword().equals(mParam1)) {
                         u = data.getValue(Users.class);
-                        adapter = new textAdapter(getContext(), u.requests);
+                        adapter = new textAdapter(getContext(), u.getRequests());
                         listView.setAdapter(adapter);
                         myRef = FB.F.getReference("Users/user" + (t + 1));
                     }
@@ -145,7 +145,7 @@ public class thirdfarg extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
         { @Override public void onClick(DialogInterface dialog, int which)
         {
-            u.requests.remove(message);
+            u.getRequests().remove(message);
             myRef.setValue(u);
             dialog.dismiss(); } });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()

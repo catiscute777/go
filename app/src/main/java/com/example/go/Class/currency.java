@@ -10,11 +10,11 @@ public class currency {
     /**
      * The type of the currency (e.g., "USD", "EUR", "ILS").
      */
-    public String type;
+    private String type;
     /**
      * The current sum or amount associated with this currency.
      */
-    public int sum;
+    private int sum;
 
     /**
      * Default constructor for the currency class.
@@ -34,5 +34,17 @@ public class currency {
         this.sum = sum;
         this.type = type;
     }
+public String getType(){
+        return this.type;
+}
+public int getSum(){
+        return this.sum;
+}
+public void setSum(int s){
+        this.sum = s;
+}
+public void setType(String t){
+        this.type = t;
 
+}
 }

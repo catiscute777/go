@@ -1,4 +1,4 @@
-package com.example.go;
+package com.example.go.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.go.Class.text;
+import com.example.go.R;
 
 import java.util.ArrayList;
 
@@ -55,7 +58,7 @@ public class textAdapter extends ArrayAdapter<text> {
         }
         TextView tvName = convertView.findViewById(R.id.emailTextView);
         if (text != null) {
-            tvName.setText(text.messageText);
+            tvName.setText(text.getContent());
         }
         return convertView;
     }

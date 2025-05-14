@@ -20,7 +20,6 @@ import com.example.go.Adapters.CustomAdapter;
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
 import com.example.go.R;
-import com.example.go.map;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -137,8 +136,7 @@ public class choosebuyer extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot data : snapshot.getChildren()) {
-                                Log.d("jok", data.getValue(Users.class).address);
-                                if (data.getValue(Users.class).city.equals(city1) && (check(data.getValue(Users.class), currncy, sum))) {
+                                if (data.getValue(Users.class).getCity().equals(city1) && (check(data.getValue(Users.class), currncy, sum))) {
                                     forplace.add(data.getValue(Users.class));
                                     Log.d("msg", forplace.toString());
                                 }
@@ -174,10 +172,10 @@ public class choosebuyer extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                next.putExtra("e", users.email);
-                next.putExtra("c", users.city);
+                next.putExtra("e", users.getEmail());
+                next.putExtra("c", users.getCity());
                 next.putExtra("r", req);
-                next.putExtra("a", users.address);
+                next.putExtra("a", users.getAddress());
                 startActivity(next);
                 dialog.dismiss();
             }
@@ -204,10 +202,10 @@ public class choosebuyer extends AppCompatActivity {
      * @throws NullPointerException If the user or any of its currency are null.
      */
     public static boolean check(Users s, String c, int n) {
-        for (int i = 1; i < s.currency.size(); i++) {
-            String type = s.currency.get(i).type;
+        for (int i = 1; i < s.getCurrency().size(); i++) {
+            String type = s.getCurrency().get(i).getType();
             type = type.substring(0, 3);
-            if (type.equals(c) && s.currency.get(i).sum >= 0.75 * n)
+            if (type.equals(c) && s.getCurrency().get(i).getSum() >= 0.75 * n)
                 return true;
         }
         return false;

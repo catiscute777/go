@@ -2,8 +2,6 @@ package com.example.go.Class;
 
 import android.util.Log;
 
-import com.example.go.text;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,31 +14,31 @@ public class Users implements Serializable {
     /**
      * The email address of the user.
      */
-    public String email;
+    private String email;
     /**
      * The password associated with the user's account.
      */
-    public String password;
+    private String password;
     /**
      * The city where the user resides.
      */
-    public String city;
+    private String city;
     /**
      * The full address of the user.
      */
-    public String address;
+    private String address;
     /**
      * A list of currencies associated with the user.
      */
-    public ArrayList<com.example.go.Class.currency> currency;
+    private ArrayList<com.example.go.Class.currency> currency;
     /**
      * A list of messages associated with the user.
      */
-    public ArrayList<text> msges;
+    private ArrayList<text> msges;
     /**
      * A list of requests associated with the user.
      */
-    public ArrayList<text> requests;
+    private ArrayList<text> requests;
 
     /**
      * Constructs a new {@code Users} object with default values.
@@ -81,6 +79,50 @@ public class Users implements Serializable {
             Log.e("Users", "currencyList is null");
         }
     }
+
+    public String getEmail()
+    {return  this.email;}
+
+    public void setEmail(String email)
+    {this.email=email;}
+
+    public String getPassword()
+    {return  this.password;}
+
+    public void setPassword(String password)
+    {this.password=password;}
+
+    public String getCity()
+    {return  this.city;}
+
+    public void setCity(String city)
+    {this.city=city;}
+
+    public String getAddress()
+    {return  this.address;}
+
+    public void setAddress(String address)
+    {this.address=address;}
+
+    public ArrayList<currency> getCurrency()
+    {return  this.currency;}
+
+    public void setCurrency(ArrayList<currency> currency)
+    {this.currency=currency;}
+
+    public ArrayList<text>getMsges()
+    {return  this.msges;}
+
+    public void setMsges(ArrayList<text> msges)
+    {this.msges=msges;}
+
+    public ArrayList<text> getRequests()
+    {return  this.requests;}
+
+    public void setRequests(ArrayList<text> requests)
+    {this.requests=requests;}
+
+
 
 
 }

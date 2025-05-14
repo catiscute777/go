@@ -1,4 +1,4 @@
-package com.example.go;
+package com.example.go.forseller;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,8 +13,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.go.Adapters.textAdapter;
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
+import com.example.go.Class.text;
+import com.example.go.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -92,11 +95,11 @@ public class secondfrag extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    if (data.getValue(Users.class).password.equals(mParam1)) {
+                    if (data.getValue(Users.class).getPassword().equals(mParam1)) {
 
                         u = data.getValue(Users.class);
                         if (u != null) {
-                            adapter = new textAdapter(getContext(), u.msges);
+                            adapter = new textAdapter(getContext(), u.getMsges());
                             listView.setAdapter(adapter);
                             myRef = FB.F.getReference("Users/user" + (t + 1));
                         }
@@ -138,20 +141,20 @@ public class secondfrag extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int t = message.messageText.indexOf(":");
-                String s = message.messageText.substring(t + 2);
+                int t = message.getContent().indexOf(":");
+                String s = message.getContent().substring(t + 2);
                 int n = Integer.parseInt(s.substring(0, s.length() - 4));
                 s = s.substring(s.length() - 3);
-                for (int i = 1; i < u.currency.size(); i++) {
-                    if (u.currency.get(i).type.substring(0, 3).equals(s)) {
-                        if (u.currency.get(i).sum > n)
-                            u.currency.get(i).sum = u.currency.get(i).sum - n;
-                        if (u.currency.get(i).sum < n)
-                            u.currency.get(i).sum = 0;
+                for (int i = 1; i < u.getCurrency().size(); i++) {
+                    if (u.getCurrency().get(i).getType().substring(0, 3).equals(s)) {
+                        if (u.getCurrency().get(i).getSum()> n)
+                            u.getCurrency().get(i).setSum(u.getCurrency().get(i).getSum() - n);
+                        if (u.getCurrency().get(i).getSum() < n)
+                            u.getCurrency().get(i).setSum(0);
                     }
                 }
-                u.requests.add(message);
-                u.msges.remove(message);
+                u.getRequests().add(message);
+                u.getMsges().remove(message);
                 myRef.setValue(u);
                 dialog.dismiss();
             }

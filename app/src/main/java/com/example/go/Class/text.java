@@ -1,4 +1,4 @@
-package com.example.go;
+package com.example.go.Class;
 
 /**
  * Represents a text message with an associated email user.
@@ -8,11 +8,13 @@ public class text {
     /**
      * The email address of the user associated with the message.
      */
-     String emailUser;
+     private String emailUser;
     /**
      * The text content of the message.
      */
-     String messageText;
+    private String messageText;
+
+    private boolean isRead;
 
     /**
      * Default constructor for the Text class.
@@ -31,6 +33,7 @@ public class text {
     public text(String emailUser, String messageText) {
         this.messageText = messageText;
         this.emailUser = emailUser;
+        this.isRead = false;
     }
 
     /**
@@ -39,7 +42,7 @@ public class text {
      * @return The text content of the message.
      */
     public String getContent() {
-        return messageText;
+        return this.messageText;
     }
 
     /**
@@ -57,7 +60,7 @@ public class text {
      * @return The email address of the user.
      */
     public String getemailuser() {
-        return emailUser;
+        return this.emailUser;
     }
 
     /**
@@ -68,4 +71,10 @@ public class text {
     public void setemailuser(String content) {
         this.emailUser = content;
     }
+
+    public boolean getIsRead()
+    {return this.isRead;}
+
+    public void setIsReadtrue(){
+        this.isRead = true;}
 }
