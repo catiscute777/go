@@ -1,0 +1,314 @@
+@startuml
+class com.example.go.loginactivity.loginfrag {
+- EditText etEmail
+- EditText etPassword
+- Button btnLogin
+~ TextView tv
+~ FirebaseAuth first
+- {static} String ARG_PARAM1
+- {static} String ARG_PARAM2
+- String mParam1
+- String mParam2
++ {static} loginfrag newInstance(String,String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void getpremision()
+- void loginUser(String,String)
+}
+
+
+class com.example.go.forseller.thirdfarg {
+- {static} String ARG_PARAM1
+~ Users u
+~ int t
+~ DatabaseReference myRef
+~ textAdapter adapter
+~ text message
+- String mParam1
++ {static} thirdfarg newInstance(String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void showalert()
+}
+
+
+class com.example.go.forbuyer.choosebuyer {
+~ ArrayList<Users> all
+~ ArrayList<Users> forplace
+- CustomAdapter customAdapter
+- ListView listView1
+~ Intent next
+~ Users users
+~ String req
+~ Spinner places
+~ ImageButton btn
+~ ArrayAdapter<CharSequence> dp
+# void onCreate(Bundle)
+- void showAlertDialog()
++ {static} boolean check(Users,String,int)
+}
+
+
+class com.example.go.loginactivity.LoginActivity {
+~ FrameLayout fram
+~ TabLayout tab
+- EditText etEmail
+- EditText etPassword
+- Button btnLogin
+~ Intent in
+# void onCreate(Bundle)
+}
+
+
+class com.example.go.forbuyer.MainActivity {
+~ ArrayAdapter<CharSequence> dp
+~ Button b
+~ EditText sum
+~ Button bt
+~ TextView result
+~ Spinner change
+# void onCreate(Bundle)
++ void doo(View)
+}
+
+
+class com.example.go.buildservises.MyReceiver {
++ void onReceive(Context,Intent)
+- void sendNotification(Context,String)
+}
+
+class com.example.go.loginactivity.register {
+- EditText etEmail
+- EditText etPassword
+- Button btnSignUp
+~ FirebaseAuth firstAuth
+# void onCreate(Bundle)
+- void registeruser(String,String)
+}
+
+
+interface com.example.go.buildservises.AddressValidationCallback {
+~ void onResult(boolean)
+}
+
+class com.example.go.loginactivity.loginforseller {
+~ Intent intt
+~ TextView tv
+- EditText etEmail
+- EditText etPassword
+- Button btnLogin
+- {static} String ARG_PARAM1
+- {static} String ARG_PARAM2
+- String mParam1
+- String mParam2
++ {static} loginforseller newInstance(String,String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void loginUser(String,String)
+}
+
+
+class com.example.go.Adapters.currencyAdapter {
++ View getView(int,View,ViewGroup)
+}
+
+class com.example.go.Adapters.textAdapter {
++ View getView(int,View,ViewGroup)
+}
+
+class com.example.go.forseller.secondfrag {
+- {static} String ARG_PARAM1
+- Users u
+- text message
+- int t
+- DatabaseReference myRef
+- textAdapter adapter
+- String mParam1
++ {static} secondfrag newInstance(String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void showalert()
+}
+
+
+class com.example.go.buildservises.go {
++ void onCreate()
+}
+
+class com.example.go.forbuyer.FirebasedatabseService {
++ int onStartCommand(Intent,int,int)
+- void createNotificationChannel()
++ IBinder onBind(Intent)
+- void scheduleAlarm(String)
+}
+
+class com.example.go.forbuyer.map {
+- int FINE_PERMISSION_CODE
+- GoogleMap map
+~ Button btn
+~ FirebaseUser currentUser
+~ String e
+~ Location mylocation
+~ String rq
+~ Users buy
+~ int t
+~ int in
+~ DatabaseReference myref
+~ Intent gi
+~ String address
+~ String city
+~ Intent intent
+~ FusedLocationProviderClient fus
+# void onCreate(Bundle)
+- void getlastloaction()
++ void onMapReady(GoogleMap)
++ void onRequestPermissionsResult(int,String[],int[])
++ void showLocationOnMap(String)
+- void getDirections(LatLng,LatLng)
+- void showAlertDialog()
+}
+
+
+class com.example.go.forseller.allseller {
+~ FrameLayout fram
+~ Intent gi
+~ TabLayout tab
+# void onCreate(Bundle)
+}
+
+
+class com.example.go.forseller.Firstfrag {
+~ Intent gi
+~ int in
+~ Users u
+~ currency currncy
+~ AlertDialog.Builder alrt
+- ArrayList<currency> List
+~ DatabaseReference myRef
+~ currencyAdapter adapter
+~ ListView listView
+~ int t
+~ Users k
+- {static} String ARG_PARAM1
+- String mParam1
++ {static} Firstfrag newInstance(String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void showalert()
+- void EditAlertDialog(currency)
++ void place(String,int)
+}
+
+
+class com.example.go.Class.text {
+- String emailUser
+- String messageText
+- boolean isRead
++ String getContent()
++ void setContent(String)
++ String getemailuser()
++ void setemailuser(String)
++ boolean getIsRead()
++ void setIsReadtrue()
+}
+
+
+class com.example.go.Class.FB {
++ {static} FirebaseDatabase F
++ {static} DatabaseReference buyer
+}
+
+class com.example.go.Class.currency {
+- String type
+- int sum
++ String getType()
++ int getSum()
++ void setSum(int)
++ void setType(String)
+}
+
+
+class com.example.go.Class.Users {
+- String email
+- String password
+- String city
+- String address
+- ArrayList<com.example.go.Class.currency> currency
+- ArrayList<text> msges
+- ArrayList<text> requests
++ void addcurrency(currency)
++ String getEmail()
++ void setEmail(String)
++ String getPassword()
++ void setPassword(String)
++ String getCity()
++ void setCity(String)
++ String getAddress()
++ void setAddress(String)
++ ArrayList<currency> getCurrency()
++ void setCurrency(ArrayList<currency>)
++ ArrayList<text> getMsges()
++ void setMsges(ArrayList<text>)
++ ArrayList<text> getRequests()
++ void setRequests(ArrayList<text>)
+}
+
+
+class com.example.go.loginactivity.registerforseller {
+- EditText etEmail
+- EditText etPassword
+- Button btnSignUp
+~ ArrayAdapter<CharSequence> dp
+~ Spinner spin
+~ EditText eda
+~ boolean working
+~ ArrayList<Users> us
+~ int l
+~ boolean working1
+# void onCreate(Bundle)
+- void checkingadress(String,String,AddressValidationCallback)
+- void addressreal(String,AddressValidationCallback)
+- void registeruser(String,String,String,String)
+}
+
+
+interface com.example.go.buildservises.servis {
+~ Call<JsonObject> getExchangeRates(String)
+}
+
+class com.example.go.buildservises.build {
+- {static} Retrofit retrofit
++ {static} Retrofit getRetrofitInstance()
+}
+
+
+class com.example.go.Adapters.CustomAdapter {
+- String type1
++ View getView(int,View,ViewGroup)
+}
+
+
+
+
+androidx.fragment.app.Fragment <|-- com.example.go.loginactivity.loginfrag
+androidx.fragment.app.Fragment <|-- com.example.go.forseller.thirdfarg
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.choosebuyer
+com.example.go.loginactivity.OnCreateContextMenuListener <|.. com.example.go.loginactivity.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.MainActivity
+android.content.BroadcastReceiver <|-- com.example.go.buildservises.MyReceiver
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.register
+androidx.fragment.app.Fragment <|-- com.example.go.loginactivity.loginforseller
+android.widget.ArrayAdapter <|-- com.example.go.Adapters.currencyAdapter
+android.widget.ArrayAdapter <|-- com.example.go.Adapters.textAdapter
+androidx.fragment.app.Fragment <|-- com.example.go.forseller.secondfrag
+android.app.Application <|-- com.example.go.buildservises.go
+android.app.Service <|-- com.example.go.forbuyer.FirebasedatabseService
+com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.go.forbuyer.map
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.map
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forseller.allseller
+androidx.fragment.app.Fragment <|-- com.example.go.forseller.Firstfrag
+java.io.Serializable <|.. com.example.go.Class.Users
+androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.registerforseller
+android.widget.ArrayAdapter <|-- com.example.go.Adapters.CustomAdapter
+@enduml
