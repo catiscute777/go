@@ -23,8 +23,7 @@ import java.util.ArrayList;
 public class currencyAdapter extends ArrayAdapter<currency> {
     /**
      * Constructs a {@code currencyAdapter} with the given context and list of currency objects.
-     *
-     * @param context  The current context.
+     ** @param context  The current context.
      * @param currency The list of {@link currency} objects to display.
      */
     public currencyAdapter(Context context, ArrayList<currency> currency) {
@@ -52,11 +51,17 @@ public class currencyAdapter extends ArrayAdapter<currency> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list, parent, false);
         }
+
         TextView tvName = convertView.findViewById(R.id.tvName);
-        TextView tvAge = convertView.findViewById(R.id.tvAge);
+        TextView tvsum = convertView.findViewById(R.id.tvsum);
         if (currency != null) {
+            if(position>0){
             tvName.setText(currency.getType());
-            tvAge.setText(String.valueOf(currency.getSum()));
+            tvsum.setText(String.valueOf(currency.getSum()));}
+            else{
+                tvName.setText(currency.getType());
+                tvsum.setText("");
+            }
         }
         return convertView;
     }

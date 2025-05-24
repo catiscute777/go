@@ -159,6 +159,9 @@ public class loginfrag extends Fragment {
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
             }
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS}, 1);
+            }
         }
     }
 

@@ -157,6 +157,7 @@ public class secondfrag extends Fragment {
                 u.getMsges().remove(message);
                 myRef.setValue(u);
                 dialog.dismiss();
+                adapter.notifyDataSetChanged();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

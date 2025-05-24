@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -86,13 +87,17 @@ public class MainActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!sum.getText().toString().isEmpty()){
                 int amount = Integer.parseInt(sum.getText().toString());
                 String choosencurrncy = change.getSelectedItem().toString();
                 choosencurrncy = choosencurrncy.substring(0, 3);
                 Intent in = new Intent(MainActivity.this, choosebuyer.class);
                 in.putExtra("currncy", choosencurrncy);
                 in.putExtra("n", amount);
-                startActivity(in);
+                startActivity(in);}
+                else{
+                    Toast.makeText(MainActivity.this, "You didn't enter an amount", Toast.LENGTH_SHORT).show();;
+                }
             }
         });
     }

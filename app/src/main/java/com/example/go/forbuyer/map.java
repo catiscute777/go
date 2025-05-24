@@ -148,10 +148,8 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                Log.d("Mainyutyutyutyuy", "Error: " + location);
                 if(location != null){
                     mylocation = location;
-                    Log.d("MainActivity", "Error: " + mylocation.getLatitude());
                     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     mapFragment.getMapAsync(map.this);
                 }
@@ -227,7 +225,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
      *
      */
     private void getDirections(LatLng origin, LatLng destination)
-    {Log.d("dfgdffhdhk", "working");
+    {
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin="+origin.latitude+","+origin.longitude+"&destination="+destination.latitude+","+destination.longitude+"&key=AIzaSyBnimj_K9I8GFNHCjFFF1v0bEI2Qtk--aA";
         Log.d("check", url);
         OkHttpClient client = new OkHttpClient();

@@ -13,10 +13,12 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 
 import com.example.go.Class.FB;
 import com.example.go.Class.Users;
 import com.example.go.Class.text;
+import com.example.go.R;
 import com.example.go.buildservises.MyReceiver;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,7 @@ public class FirebasedatabseService extends Service {
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
         createNotificationChannel();
+        startForegroundService();
         String refernce = intent.getStringExtra("myuser");
         refernce = refernce.substring(refernce.lastIndexOf("/") + 1);
         String email = intent.getStringExtra("email");
@@ -71,9 +74,24 @@ public class FirebasedatabseService extends Service {
 
             }
         });
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
+    /**
+     *  Starts a foreground service with a notification.
+     *  This method creates a notification with specific properties,
+     *  sets it as the foreground service, and starts the service.
+     *  The notification channel is created if the Android version is Oreo or higher.
+     * */
 
+    private void startForegroundService() {
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, "avital")
+                .setContentTitle("wait for approve message from seller")
+                .setContentText("app CashexChange is running in the background.")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setPriority(NotificationCompat.PRIORITY_LOW);
+
+        startForeground(1, notification.build());
+    }
 
     /**
      * Creates a notification channel for sending notifications.

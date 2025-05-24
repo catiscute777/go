@@ -12,7 +12,7 @@
         android:text="currency" />
 
     <TextView
-        android:id="@+id/tvAge"
+        android:id="@+id/tvsum"
         android:layout_width="239dp"
         android:layout_height="38dp"
         android:text="sum" />

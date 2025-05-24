@@ -147,7 +147,8 @@ public class thirdfarg extends Fragment {
         {
             u.getRequests().remove(message);
             myRef.setValue(u);
-            dialog.dismiss(); } });
+            dialog.dismiss();
+        adapter.notifyDataSetChanged();} });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
         { @Override
         public void onClick(DialogInterface dialog, int which)
