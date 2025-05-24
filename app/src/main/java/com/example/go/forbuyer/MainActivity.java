@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!sum.getText().toString().isEmpty()){
+
                 int amount = Integer.parseInt(sum.getText().toString());
                 String choosencurrncy = change.getSelectedItem().toString();
                 choosencurrncy = choosencurrncy.substring(0, 3);
@@ -95,10 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 in.putExtra("currncy", choosencurrncy);
                 in.putExtra("n", amount);
                 startActivity(in);}
-                else{
-                    Toast.makeText(MainActivity.this, "You didn't enter an amount", Toast.LENGTH_SHORT).show();;
-                }
-            }
+
+
         });
     }
 
@@ -113,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view The view that triggered this method call.
      */
     public void doo(View view) {
+        if(!sum.getText().toString().isEmpty()){
         servis retrofitInterface = build.getRetrofitInstance().create(servis.class);
         Call<JsonObject> call = retrofitInterface.getExchangeRates("f87491b58ea3fa2f8ef328a73082fb0b");
         call.enqueue(new Callback<JsonObject>() {
@@ -141,4 +140,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+        else{
+            Toast.makeText(MainActivity.this, "You didn't enter an amount", Toast.LENGTH_SHORT).show();;
+        }}
 }
