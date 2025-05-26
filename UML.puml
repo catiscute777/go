@@ -17,6 +17,16 @@ class com.example.go.loginactivity.loginfrag {
 }
 
 
+class com.example.go.databinding.ListtextBinding {
+- LinearLayout rootView
++ TextView emailTextView
++ LinearLayout getRoot()
++ {static} ListtextBinding inflate(LayoutInflater)
++ {static} ListtextBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ListtextBinding bind(View)
+}
+
+
 class com.example.go.forseller.thirdfarg {
 - {static} String ARG_PARAM1
 ~ Users u
@@ -29,6 +39,22 @@ class com.example.go.forseller.thirdfarg {
 + void onCreate(Bundle)
 + View onCreateView(LayoutInflater,ViewGroup,Bundle)
 - void showalert()
+}
+
+
+class com.example.go.databinding.ActivityMainBinding {
+- ConstraintLayout rootView
++ Button button
++ Button button2
++ EditText editTextNumber
++ ConstraintLayout main
++ Space space
++ Spinner spinner
++ TextView textView
++ ConstraintLayout getRoot()
++ {static} ActivityMainBinding inflate(LayoutInflater)
++ {static} ActivityMainBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityMainBinding bind(View)
 }
 
 
@@ -72,10 +98,48 @@ class com.example.go.forbuyer.MainActivity {
 }
 
 
+class com.example.go.databinding.ActivityLogin2Binding {
+- LinearLayout rootView
++ FrameLayout frame
++ LinearLayout main
++ TabItem tab1
++ TabItem tab2
++ TabLayout tablel
++ LinearLayout getRoot()
++ {static} ActivityLogin2Binding inflate(LayoutInflater)
++ {static} ActivityLogin2Binding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityLogin2Binding bind(View)
+}
+
+
 class com.example.go.buildservises.MyReceiver {
 + void onReceive(Context,Intent)
 - void sendNotification(Context,String)
 }
+
+class com.example.go.databinding.ActivityRegisterforsellerBinding {
+- LinearLayout rootView
++ Button btn
++ EditText editTextTextPostalAddress
++ EditText etEmail
++ EditText etPassword
++ Spinner spinner3
++ LinearLayout getRoot()
++ {static} ActivityRegisterforsellerBinding inflate(LayoutInflater)
++ {static} ActivityRegisterforsellerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityRegisterforsellerBinding bind(View)
+}
+
+
+class com.example.go.databinding.ActivityMapBinding {
+- RelativeLayout rootView
++ Button button5
++ RelativeLayout getRoot()
++ {static} ActivityMapBinding inflate(LayoutInflater)
++ {static} ActivityMapBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityMapBinding bind(View)
+}
+
 
 class com.example.go.loginactivity.register {
 - EditText etEmail
@@ -112,8 +176,23 @@ class com.example.go.Adapters.currencyAdapter {
 + View getView(int,View,ViewGroup)
 }
 
+class com.example.go.databinding.FragmentFirstfragBinding {
+- FrameLayout rootView
++ Button button4
++ ListView list6
++ FrameLayout getRoot()
++ {static} FragmentFirstfragBinding inflate(LayoutInflater)
++ {static} FragmentFirstfragBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentFirstfragBinding bind(View)
+}
+
+
 class com.example.go.Adapters.textAdapter {
 + View getView(int,View,ViewGroup)
+}
+
+class com.example.go.ExampleUnitTest {
++ void addition_isCorrect()
 }
 
 class com.example.go.forseller.secondfrag {
@@ -131,16 +210,77 @@ class com.example.go.forseller.secondfrag {
 }
 
 
+class com.example.go.ExampleInstrumentedTest {
++ void useAppContext()
+}
+
 class com.example.go.buildservises.go {
 + void onCreate()
 }
 
+class com.example.go.databinding.ActivityChoosebuyerBinding {
+- LinearLayout rootView
++ ImageButton button3
++ ListView listView
++ Spinner spinner2
++ LinearLayout getRoot()
++ {static} ActivityChoosebuyerBinding inflate(LayoutInflater)
++ {static} ActivityChoosebuyerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityChoosebuyerBinding bind(View)
+}
+
+
+class com.example.go.databinding.ActivityRegisterBinding {
+- LinearLayout rootView
++ Button btnLogin
++ EditText etEmail
++ EditText etPassword
++ LinearLayout getRoot()
++ {static} ActivityRegisterBinding inflate(LayoutInflater)
++ {static} ActivityRegisterBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityRegisterBinding bind(View)
+}
+
+
+class com.example.go.databinding.FragmentSecondfragBinding {
+- FrameLayout rootView
++ ListView list56
++ FrameLayout getRoot()
++ {static} FragmentSecondfragBinding inflate(LayoutInflater)
++ {static} FragmentSecondfragBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentSecondfragBinding bind(View)
+}
+
+
+class com.example.go.databinding.FragmentThirdfargBinding {
+- FrameLayout rootView
++ ListView list89
++ FrameLayout getRoot()
++ {static} FragmentThirdfargBinding inflate(LayoutInflater)
++ {static} FragmentThirdfargBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentThirdfargBinding bind(View)
+}
+
+
 class com.example.go.forbuyer.FirebasedatabseService {
 + int onStartCommand(Intent,int,int)
+- void startForegroundService()
 - void createNotificationChannel()
 + IBinder onBind(Intent)
 - void scheduleAlarm(String)
 }
+
+class com.example.go.databinding.AlerttBinding {
+- LinearLayout rootView
++ EditText editTextNumber2
++ LinearLayout spin
++ Spinner spinnerOptions
++ LinearLayout getRoot()
++ {static} AlerttBinding inflate(LayoutInflater)
++ {static} AlerttBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} AlerttBinding bind(View)
+}
+
 
 class com.example.go.forbuyer.map {
 - int FINE_PERMISSION_CODE
@@ -174,6 +314,16 @@ class com.example.go.forseller.allseller {
 ~ Intent gi
 ~ TabLayout tab
 # void onCreate(Bundle)
+}
+
+
+class com.example.go.databinding.AlerteditBinding {
+- LinearLayout rootView
++ EditText editTextNumber4
++ LinearLayout getRoot()
++ {static} AlerteditBinding inflate(LayoutInflater)
++ {static} AlerteditBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} AlerteditBinding bind(View)
 }
 
 
@@ -254,6 +404,34 @@ class com.example.go.Class.Users {
 }
 
 
+class com.example.go.databinding.ActivityAllsellerBinding {
+- LinearLayout rootView
++ FrameLayout frame
++ LinearLayout main
++ TabItem tab1
++ TabItem tab2
++ TabItem tab3
++ TabLayout tablel
++ LinearLayout getRoot()
++ {static} ActivityAllsellerBinding inflate(LayoutInflater)
++ {static} ActivityAllsellerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityAllsellerBinding bind(View)
+}
+
+
+class com.example.go.databinding.FragmentLoginforsellerBinding {
+- LinearLayout rootView
++ Button btnLogin
++ EditText etEmail
++ EditText etPassword
++ TextView registerTextView
++ LinearLayout getRoot()
++ {static} FragmentLoginforsellerBinding inflate(LayoutInflater)
++ {static} FragmentLoginforsellerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentLoginforsellerBinding bind(View)
+}
+
+
 class com.example.go.loginactivity.registerforseller {
 - EditText etEmail
 - EditText etPassword
@@ -282,6 +460,42 @@ class com.example.go.buildservises.build {
 }
 
 
+class com.example.go.databinding.ListusersBinding {
+- LinearLayout rootView
++ TextView addressTextView
++ TextView emailTextView
++ TextView sumTextView
++ LinearLayout getRoot()
++ {static} ListusersBinding inflate(LayoutInflater)
++ {static} ListusersBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ListusersBinding bind(View)
+}
+
+
+class com.example.go.databinding.ListBinding {
+- LinearLayout rootView
++ TextView tvName
++ TextView tvsum
++ LinearLayout getRoot()
++ {static} ListBinding inflate(LayoutInflater)
++ {static} ListBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ListBinding bind(View)
+}
+
+
+class com.example.go.databinding.FragmentLoginfragBinding {
+- LinearLayout rootView
++ Button btnLogin
++ EditText etEmail
++ EditText etPassword
++ TextView registerTextView
++ LinearLayout getRoot()
++ {static} FragmentLoginfragBinding inflate(LayoutInflater)
++ {static} FragmentLoginfragBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentLoginfragBinding bind(View)
+}
+
+
 class com.example.go.Adapters.CustomAdapter {
 - String type1
 + View getView(int,View,ViewGroup)
@@ -291,24 +505,41 @@ class com.example.go.Adapters.CustomAdapter {
 
 
 androidx.fragment.app.Fragment <|-- com.example.go.loginactivity.loginfrag
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ListtextBinding
 androidx.fragment.app.Fragment <|-- com.example.go.forseller.thirdfarg
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityMainBinding
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.choosebuyer
 com.example.go.loginactivity.OnCreateContextMenuListener <|.. com.example.go.loginactivity.LoginActivity
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.LoginActivity
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.MainActivity
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityLogin2Binding
 android.content.BroadcastReceiver <|-- com.example.go.buildservises.MyReceiver
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityRegisterforsellerBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityMapBinding
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.register
 androidx.fragment.app.Fragment <|-- com.example.go.loginactivity.loginforseller
 android.widget.ArrayAdapter <|-- com.example.go.Adapters.currencyAdapter
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.FragmentFirstfragBinding
 android.widget.ArrayAdapter <|-- com.example.go.Adapters.textAdapter
 androidx.fragment.app.Fragment <|-- com.example.go.forseller.secondfrag
 android.app.Application <|-- com.example.go.buildservises.go
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityChoosebuyerBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityRegisterBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.FragmentSecondfragBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.FragmentThirdfargBinding
 android.app.Service <|-- com.example.go.forbuyer.FirebasedatabseService
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.AlerttBinding
 com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.go.forbuyer.map
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forbuyer.map
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.forseller.allseller
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.AlerteditBinding
 androidx.fragment.app.Fragment <|-- com.example.go.forseller.Firstfrag
 java.io.Serializable <|.. com.example.go.Class.Users
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ActivityAllsellerBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.FragmentLoginforsellerBinding
 androidx.appcompat.app.AppCompatActivity <|-- com.example.go.loginactivity.registerforseller
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ListusersBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.ListBinding
+androidx.viewbinding.ViewBinding <|.. com.example.go.databinding.FragmentLoginfragBinding
 android.widget.ArrayAdapter <|-- com.example.go.Adapters.CustomAdapter
 @enduml

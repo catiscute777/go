@@ -119,7 +119,7 @@ public class registerforseller extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Log.d("cheking","hello world ");
+                                        Log.d("cheking",""+isValid);
                                         Toast.makeText(registerforseller.this, "the address is wrong or there is a buyer in this place", Toast.LENGTH_SHORT).show();
                                     }
                                 });

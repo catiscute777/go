@@ -135,6 +135,7 @@ public class FirebasedatabseService extends Service {
      * an alarm that will trigger the broadcast at the current time.
      *
      * @param youCanGoTakeMoney The message to be broadcasted to the user.
+     *
      */
     @SuppressLint("ScheduleExactAlarm")
     private void scheduleAlarm(String youCanGoTakeMoney) {

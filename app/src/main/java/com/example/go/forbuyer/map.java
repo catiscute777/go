@@ -31,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -211,9 +212,9 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         if (addresses.size() > 0)
         { LatLng location = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
             map.addMarker(new MarkerOptions().position(location).title("Your destination"));
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 50));
             LatLng sy = new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
-            map.addMarker(new MarkerOptions().position(sy).title("My location"));
+            map.addMarker(new MarkerOptions().position(sy).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             map.moveCamera(CameraUpdateFactory.newLatLng(sy));
             getDirections(sy,location);
         } }
