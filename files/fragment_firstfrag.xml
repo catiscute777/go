@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".forseller.Firstfrag">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="741dp"
+        android:orientation="vertical"
+        >
+
+        <ListView
+            android:backgroundTint="#FAD4C0"
+            android:id="@+id/list6"
+            android:background="@drawable/spinnergood"
+            android:layout_width="match_parent"
+            android:layout_height="511dp">
+
+        </ListView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="95dp" />
+
+        <Button
+            android:background="@drawable/spinnergood"
+            app:backgroundTint="#137617"
+            android:id="@+id/button4"
+            android:onClick="fg"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:text="Button" />
+    </LinearLayout>
+
+</FrameLayout>

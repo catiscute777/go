@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.go">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <application
+        android:name=".buildservises.go"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Go"
+        tools:targetApi="31">
+        <service
+            android:name=".forbuyer.FirebasedatabseService"
+            android:foregroundServiceType="dataSync"
+            android:enabled="true"
+            android:exported="false"/>
+
+
+        <receiver android:name=".buildservises.MyReceiver"
+            android:exported="true">
+           <intent-filter>
+                <action android:name="com.example.FIREBASE_UPDATE"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".forbuyer.map"
+            android:exported="false" />
+        <activity
+            android:name=".forbuyer.choosebuyer"
+            android:exported="false" />
+        <activity
+            android:name=".loginactivity.register"
+            android:exported="false" />
+        <activity
+            android:name=".forseller.allseller"
+            android:exported="false" />
+        <activity
+            android:name=".loginactivity.registerforseller"
+            android:exported="false" />
+        <activity
+            android:name=".loginactivity.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".forbuyer.MainActivity"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAP3nijjt_BmLOfTxcjJ22cNMOkpmBaE-c" />
+    </application>
+
+</manifest>

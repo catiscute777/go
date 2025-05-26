@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAD4C0"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Space
+        android:layout_width="370dp"
+        android:layout_height="27dp" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="371dp"
+        android:layout_height="76dp"
+        android:background="@drawable/spinnergood" />
+
+    <Space
+        android:layout_width="370dp"
+        android:layout_height="53dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPostalAddress"
+        android:layout_width="374dp"
+        android:layout_height="76dp"
+        android:background="@drawable/spinnergood"
+        android:ems="10"
+        android:hint="address"
+        android:inputType="textPostalAddress" />
+
+    <Space
+        android:layout_width="374dp"
+        android:layout_height="49dp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="376dp"
+        android:layout_height="83dp"
+        android:background="@drawable/spinnergood"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <Space
+        android:layout_width="376dp"
+        android:layout_height="52dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="375dp"
+        android:layout_height="90dp"
+        android:background="@drawable/spinnergood"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Space
+        android:layout_width="376dp"
+        android:layout_height="61dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="303dp"
+        android:layout_height="82dp"
+        android:background="@drawable/spinnergood"
+        android:text="sgin in"
+        app:backgroundTint="#137617" />
+
+
+</LinearLayout>

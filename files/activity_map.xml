@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#075E53">
+
+    <fragment
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="371dp"
+        android:layout_height="538dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="182dp" />
+
+    <Button
+        android:background="@drawable/spinnergood"
+        android:id="@+id/button5"
+        app:backgroundTint="#137617"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="623dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="48dp"
+        android:text="send a requst"
+        android:textSize="24sp" />
+
+</RelativeLayout>
