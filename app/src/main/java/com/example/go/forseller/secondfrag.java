@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,6 +146,7 @@ public class secondfrag extends Fragment {
                 String s = message.getContent().substring(t + 2);
                 int n = Integer.parseInt(s.substring(0, s.length() - 4));
                 s = s.substring(s.length() - 3);
+                Log.d("check", s+","+n);
                 for (int i = 1; i < u.getCurrency().size(); i++) {
                     if (u.getCurrency().get(i).getType().substring(0, 3).equals(s)) {
                         if (u.getCurrency().get(i).getSum()> n)

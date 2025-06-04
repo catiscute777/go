@@ -22,7 +22,7 @@ import com.google.firebase.FirebaseApp;
  * This activity utilizes fragments to manage different login views, and it allows switching
  * between these views using a TabLayout.
  */
-public class LoginActivity extends AppCompatActivity implements View.OnCreateContextMenuListener {
+public class LoginActivity extends AppCompatActivity  {
     /**
      * The FrameLayout used to hold the login fragments.
      */

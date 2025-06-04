@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -155,7 +156,8 @@ public class choosebuyer extends AppCompatActivity {
                         }
                     });
 
-                }
+                } else
+                    Toast.makeText(choosebuyer.this, "the city is not chosen", Toast.LENGTH_SHORT).show();
             }
         });
     }

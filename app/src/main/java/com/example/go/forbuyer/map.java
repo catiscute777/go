@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -142,9 +143,9 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},FINE_PERMISSION_CODE);
-
             return;
         }
+
         Task<Location> task =  fus.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -193,7 +194,9 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         if(requestCode == FINE_PERMISSION_CODE){
             if
             (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            { getlastloaction(); } else { Log.e("MainActivity", "Permission denied."); }
+            { getlastloaction();
+            } else {
+                Log.e("MainActivity", "Permission denied."); }
         }
     }
 
@@ -211,11 +214,10 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
         Log.d("check", addresses.toString());
         if (addresses.size() > 0)
         { LatLng location = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-            map.addMarker(new MarkerOptions().position(location).title("Your destination"));
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 50));
+            map.addMarker(new MarkerOptions().position(location).title("Your destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             LatLng sy = new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
-            map.addMarker(new MarkerOptions().position(sy).title("My location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            map.moveCamera(CameraUpdateFactory.newLatLng(sy));
+            map.addMarker(new MarkerOptions().position(sy).title("My location"));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(sy,15));
             getDirections(sy,location);
         } }
     catch (IOException e) { e.printStackTrace(); }
@@ -237,9 +239,13 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
 
         } @Override
         public void onResponse(Call call, Response response)
-                throws IOException { if (response.isSuccessful())
-        { String responseData = response.body().string();
-            try { JSONObject json = new JSONObject(responseData);
+                throws IOException
+        {
+            if (response.isSuccessful())
+        {
+            String responseData = response.body().string();
+            try {
+                JSONObject json = new JSONObject(responseData);
                 JSONArray routes = json.getJSONArray("routes");
                 JSONObject route = routes.getJSONObject(0);
                 JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
@@ -248,7 +254,6 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
                 runOnUiThread(() -> {
                     PolylineOptions options = new PolylineOptions().addAll(points).color(Color.BLUE).width(3);
                     map.addPolyline(options);
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 1));
                 });
             } catch (JSONException e) { e.printStackTrace(); } }
 
@@ -271,7 +276,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
 
         {
          String useremail = currentUser.getEmail();
-            String msg  = useremail+ "send a request for:"+rq;
+            String msg  = useremail+ " send a request for:"+rq;
             text message = new text(useremail,msg);
 
             buy.getMsges().add(message);
@@ -280,7 +285,10 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
             intent.putExtra("myuser",refernce);
             intent.putExtra("msg", message.getContent());
             intent.putExtra("email",message.getemailuser());
-            startService(intent);
+            if(ActivityCompat.checkSelfPermission(map.this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED)
+            {startService(intent);
+            }else
+                Toast.makeText(map.this, "there no permission for notifications so no notification will be shown to you", Toast.LENGTH_SHORT).show();
             btn.setVisibility(INVISIBLE);
             dialog.dismiss(); }
 

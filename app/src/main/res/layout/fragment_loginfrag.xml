@@ -18,10 +18,10 @@
         app:barrierDirection="top" />
 
     <EditText
-        android:background="@drawable/spinnergood"
         android:id="@+id/etEmail"
-        android:layout_width="374dp"
-        android:layout_height="85dp"
+        android:layout_width="367dp"
+        android:layout_height="80dp"
+        android:background="@drawable/spinnergood"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
@@ -31,7 +31,7 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="377dp"
+        android:layout_width="367dp"
         android:layout_height="80dp"
         android:background="@drawable/spinnergood"
         android:hint="Password"
@@ -54,11 +54,11 @@
         android:layout_height="47dp" />
 
     <TextView
-        android:background="@drawable/spinnergood"
         android:id="@+id/registerTextView"
-        android:layout_width="313dp"
-        android:layout_height="59dp"
+        android:layout_width="316dp"
+        android:layout_height="72dp"
         android:layout_gravity="center"
+        android:background="@drawable/spinnergood"
         android:clickable="true"
         android:focusable="true"
         android:text="Don't have an account? Register"

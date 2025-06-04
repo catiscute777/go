@@ -106,8 +106,10 @@ public class registerforseller extends AppCompatActivity {
              * by checking if the email, password, address, and city are not empty.
              * is the address valid and if there is no existing buyer at the same address.
              * using call back to show if the address is valid or not*/
+
             if (!email.isEmpty() && !password.isEmpty() && !adress.isEmpty() && !City.isEmpty())
             {
+                if(!City.equals("Choose the city")){
                 try {
                     checkingadress(adress,City, new AddressValidationCallback() {
                         @Override
@@ -115,7 +117,7 @@ public class registerforseller extends AppCompatActivity {
                             if(isValid){
                                 registeruser(email, password,adress, City);
                             }
-                            else {
+                            if(!isValid) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -130,6 +132,8 @@ public class registerforseller extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
+            else
+            Toast.makeText(registerforseller.this, "the city is not chosen", Toast.LENGTH_SHORT).show();}
         else
                 Toast.makeText(registerforseller.this, "all the components are required ", Toast.LENGTH_SHORT).show();
         }

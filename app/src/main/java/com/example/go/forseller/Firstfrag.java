@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.go.Adapters.currencyAdapter;
 import com.example.go.Class.FB;
@@ -174,6 +175,8 @@ Intent gi;int in;
      * This method inflates a custom layout for the dialog, sets up a spinner
      * for currency selection and an EditText for the sum, and defines
      * the actions for the positive ("Finish") and negative ("Cancel") buttons.
+     * It then creates and shows the AlertDialog.
+     * If the selected currency is not already in the seller's currency list,
      */
     private void showalert() {
         final LayoutInflater[] inflater = {getLayoutInflater()};
@@ -191,12 +194,12 @@ Intent gi;int in;
             public void onClick(DialogInterface dialogInterface, int i) {
                 String selectedOption = spin.getSelectedItem().toString();
                int ed = parseInt(sum.getText().toString());
-
-                place(selectedOption,ed);
-
-
-
-
+               if(!u.getCurrency().contains(selectedOption)){
+                   if (ed > 1)
+                       place(selectedOption,ed);
+               }
+               else
+                   Toast.makeText(getContext(), "this currency already exists", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -228,27 +231,31 @@ Intent gi;int in;
                 View dialogView = inflater.inflate(R.layout.alertedit, null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setView(dialogView)
-                        .setTitle("Edit the currency");
+                builder.setView(dialogView).setTitle("Edit the currency");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         EditText editText = dialogView.findViewById(R.id.editTextNumber4);
                         String userInput = editText.getText().toString();
+                        if (!userInput.isEmpty()) {
                         int sum1 = parseInt(userInput);
-                        s.setSum(sum1);
+                        if(sum1>1) {
+                            s.setSum(sum1);
+                            for (int y = 0; y < u.getCurrency().size(); y++) {
+                                if (u.getCurrency().get(y).equals(s.getType()))
+                                    u.getCurrency().set(y, s);
+                            }
 
-                        for(int y=0;y<u.getCurrency().size();y++){
-                            if(u.getCurrency().get(y).equals(s.getType()))
-                                u.getCurrency().set(y,s);
-                        }
+                            getActivity().runOnUiThread(() -> {
+                                adapter.notifyDataSetChanged();
+                            });
+                            myRef.setValue(u);
 
-                        getActivity().runOnUiThread(() -> {
-                            adapter.notifyDataSetChanged(); });
-                        myRef.setValue(u);
+                        }else Toast.makeText(getContext(), "Please enter a valid number", Toast.LENGTH_SHORT).show();}
+                    else Toast.makeText(getContext(), "Please enter the new sum", Toast.LENGTH_SHORT).show();}
 
-                    }
+
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
