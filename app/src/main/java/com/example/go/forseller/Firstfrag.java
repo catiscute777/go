@@ -194,7 +194,7 @@ Intent gi;int in;
             public void onClick(DialogInterface dialogInterface, int i) {
                 String selectedOption = spin.getSelectedItem().toString();
                int ed = parseInt(sum.getText().toString());
-               if(!u.getCurrency().contains(selectedOption)){
+               if(!u.getCurrency().contains(selectedOption.substring(0,3))){
                    if (ed > 1)
                        place(selectedOption,ed);
                }
