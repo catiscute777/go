@@ -5,6 +5,7 @@ import static android.view.View.INVISIBLE;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -74,6 +75,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
     Location mylocation;String rq;
     Users buy;int t =0;int in =0;
     DatabaseReference myref;
+    SharedPreferences dp ;
     Intent gi;String address; String city;Intent intent;
     FusedLocationProviderClient fus;
 
@@ -95,6 +97,7 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
        FirebaseAuth first = FirebaseAuth.getInstance(Firstapp);
         currentUser = first.getCurrentUser();
         btn  = findViewById(R.id.button5);
+        dp = getSharedPreferences("userdata",MODE_PRIVATE);
         intent = new Intent(this, FirebasedatabseService.class);
         gi = getIntent();
         city = gi.getStringExtra("c");
@@ -282,9 +285,9 @@ public class map extends AppCompatActivity implements OnMapReadyCallback {
             buy.getMsges().add(message);
             myref.setValue(buy);
             String refernce = myref.toString();
-            intent.putExtra("myuser",refernce);
-            intent.putExtra("msg", message.getContent());
-            intent.putExtra("email",message.getemailuser());
+            dp.edit().putString("content "+message.getemailuser(),message.getContent()).apply();
+            dp.edit().putString("ref "+message.getemailuser(),refernce).apply();
+            dp.edit().apply();
             if(ActivityCompat.checkSelfPermission(map.this, android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED)
             {startService(intent);
             }else

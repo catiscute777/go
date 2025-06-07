@@ -191,15 +191,20 @@ Intent gi;int in;
         alrt.setView(alertLayout);
         alrt.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
                 String selectedOption = spin.getSelectedItem().toString();
-               int ed = parseInt(sum.getText().toString());
-               if(!u.getCurrency().contains(selectedOption.substring(0,3))){
+               if (!sum.getText().toString().isEmpty()){
+                int ed = parseInt(sum.getText().toString());
+               if(!selectedOption.isEmpty()){
+               if(!contains(selectedOption)){
                    if (ed > 1)
                        place(selectedOption,ed);
                }
                else
                    Toast.makeText(getContext(), "this currency already exists", Toast.LENGTH_SHORT).show();
+            }
+            else Toast.makeText(getContext(), "Please enter the sum", Toast.LENGTH_SHORT).show();}
             }
         });
 
@@ -211,6 +216,18 @@ Intent gi;int in;
         });
         AlertDialog alertDialog = alrt.create();
         alertDialog.show();
+    }
+    /**
+     * Checks if a currency with the given type already exists in the seller's currency list.
+     *
+     * @param s The type of the currency to check.
+     * @return True if the currency exists, false otherwise.*/
+
+    public boolean contains(String s){
+        for(int i=1;i<u.getCurrency().size();i++)
+            if(u.getCurrency().get(i).getType().equals(s))
+                return true;
+        return false;
     }
     /**
      * Displays an AlertDialog to edit or delete an existing currency entry.

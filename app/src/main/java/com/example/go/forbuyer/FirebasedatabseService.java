@@ -8,9 +8,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -20,6 +22,9 @@ import com.example.go.Class.Users;
 import com.example.go.Class.text;
 import com.example.go.R;
 import com.example.go.buildservises.MyReceiver;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,8 +34,10 @@ import com.google.firebase.database.ValueEventListener;
  * FirebasedatabseService is a background service that listens for changes in a Firebase Realtime Database.
  * When a specific change is detected (a matching message in a user's request list),
  * it schedules an alarm to notify the user.
+ *
  */
 public class FirebasedatabseService extends Service {
+    SharedPreferences dp;
 
     /**
      * Called when the service is started.
@@ -42,38 +49,52 @@ public class FirebasedatabseService extends Service {
      * @param flags   Additional data about this start request.
      * @param startId A unique integer representing this specific request to start.
      * @return The return value indicates what semantics the system should use for the service's current started state.
+     * Using a constant indicating that the service should be restarted if it were to stop,
+     * the system will attempt to restart the service as soon as possible.
+     * the sharedPreference used to remember the user data.
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
         createNotificationChannel();
         startForegroundService();
-        String refernce = intent.getStringExtra("myuser");
-        refernce = refernce.substring(refernce.lastIndexOf("/") + 1);
-        String email = intent.getStringExtra("email");
-        String text = intent.getStringExtra("msg");
-        com.example.go.Class.text message = new text(email, text);
-        DatabaseReference myref = FB.F.getReference("Users/" + refernce);
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Users n = snapshot.getValue(Users.class);
+        FirebaseApp Firstapp = FirebaseApp.getInstance("firstProject");
+        FirebaseAuth auth = FirebaseAuth.getInstance(Firstapp);
+            FirebaseUser user = auth.getCurrentUser();
+            if(user != null){
+                String email = user.getEmail();
+                Log.d("msg",""+ email);
+                dp = getSharedPreferences("userdata",MODE_PRIVATE);
+                String refernce = dp.getString("ref "+email,null);
+                Log.d("msg",""+ refernce);
+                refernce = refernce.substring(refernce.lastIndexOf("/") + 1);
+                String text = dp.getString("content "+email,null);
+                Log.d("messgin",""+ refernce);
+                Log.d("msgdgdfg",""+ text);
+                com.example.go.Class.text message = new text(email, text);
+                DatabaseReference myref = FB.F.getReference("Users/" + refernce);
+                myref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Users n = snapshot.getValue(Users.class);
 
-                for (int i = 0; i < n.getRequests().size(); i++) {
-                    if (n.getRequests().get(i).getemailuser().equals(message.getemailuser()) && (n.getRequests().get(i).getContent().equals(message.getContent()))&&(!n.getRequests().get(i).getIsRead())) {
-                        Log.d("msg", "true");
-                        scheduleAlarm("you can go take the money");
-                        n.getRequests().get(i).setIsReadtrue();
-                        myref.setValue(n);
+                        for (int i = 0; i < n.getRequests().size(); i++) {
+                            if (n.getRequests().get(i).getemailuser().equals(message.getemailuser()) && (n.getRequests().get(i).getContent().equals(message.getContent()))&&(!n.getRequests().get(i).getIsRead())) {
+                                Log.d("msg", "true");
+                                scheduleAlarm("you can go take the money");
+                                n.getRequests().get(i).setIsReadtrue();
+                                myref.setValue(n);
+
+                            }
+                        }
 
                     }
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
+                    }
+                });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            }else Toast.makeText(this, "please log in to the app ", Toast.LENGTH_SHORT).show();
 
-            }
-        });
         return START_REDELIVER_INTENT;
     }
     /**
