@@ -41,7 +41,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 /**
  * The {@code registerforseller} class manages the registration process for new sellers in the application.
  * It provides functionality to collect the seller's email, password, address, and city.
@@ -51,8 +50,9 @@ import okhttp3.Response;
 
 public class registerforseller extends AppCompatActivity {
     private EditText etEmail; private EditText etPassword;
-    private Button btnSignUp;ArrayAdapter<CharSequence> dp;
-    Spinner spin;EditText eda;boolean working = false;
+    private Button btnSignUp;
+    ArrayAdapter<CharSequence> dp;
+    Spinner spin;EditText eda;
     ArrayList<Users> us = new ArrayList<>();int l;boolean working1;
 
     /**
@@ -75,7 +75,7 @@ public class registerforseller extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnSignUp = findViewById(R.id.btn);
-        working = false;
+
         dp = ArrayAdapter.createFromResource(registerforseller.this, R.array.city, android.R.layout.simple_spinner_item);
         spin.setAdapter(dp);
         FB.buyer.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,6 +121,7 @@ public class registerforseller extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+
                                         Log.d("cheking",""+isValid);
                                         Toast.makeText(registerforseller.this, "the address is wrong or there is a buyer in this place", Toast.LENGTH_SHORT).show();
                                     }
@@ -148,7 +149,6 @@ public class registerforseller extends AppCompatActivity {
      * @throws UnsupportedEncodingException If there is an issue encoding the address for the API request.
      */
     private void checkingadress(String address,String City, AddressValidationCallback callback) throws UnsupportedEncodingException {
-        working = false;
         working1 = false;
         String addressstr = address+", "+City+", Israel";
         addressreal(addressstr, new AddressValidationCallback() {
@@ -157,7 +157,7 @@ public class registerforseller extends AppCompatActivity {
                 if(isValid){
                     for(int i =0 ; i<us.size();i++){
                         String address1 = us.get(i).getAddress()+", "+us.get(i).getCity()+", Israel";
-                        Log.d("msg",address1);
+                        Log.d("msg",addressstr);
                         Log.d("cheking",address);
                         if(addressstr.equals(address1))
                         {runOnUiThread(new Runnable() {
@@ -190,7 +190,7 @@ public class registerforseller extends AppCompatActivity {
      */
 
     private void addressreal(String address, AddressValidationCallback callback) throws UnsupportedEncodingException {
-        working = false;
+
         OkHttpClient client = new OkHttpClient();
         String formattedAddress = address.replace(" ", "+");
         String url = "https://maps.googleapis.com/maps/api/geocode/json?address="+formattedAddress+"&key=AIzaSyBnimj_K9I8GFNHCjFFF1v0bEI2Qtk--aA";
@@ -215,10 +215,10 @@ public class registerforseller extends AppCompatActivity {
                        if (results.length() > 0) {
                        JSONObject firstResult = results.getJSONObject(0);
                        if (!firstResult.has("partial_match")) {
-                           working = true;
                            callback.onResult(true);
                        }
-                       callback.onResult(false);
+                       else {
+                       callback.onResult(false);}
                        }
                    }catch (JSONException e) {
                        callback.onResult(false);
